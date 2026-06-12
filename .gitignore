@@ -1,0 +1,2 @@
+# Ignorar los datos generados por el contenedor de Jenkins
+jenkins-data/
