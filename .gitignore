@@ -1,2 +1,11 @@
-# Ignorar los datos generados por el contenedor de Jenkins
-jenkins-data/
+# Contenedores y Datos Locales
+.env
+*.log
+docker_volumes/
+.secrets/
+
+# IDEs y Editores
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

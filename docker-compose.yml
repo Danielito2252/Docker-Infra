@@ -1,33 +1,38 @@
+version: '3.8'
+
 services:
-  # Servidor Central de Automatización (Jenkins)
-  jenkins-ci:
+  # Servidor de automatización Jenkins (Eje central de orquestación de CI/CD)
+  jenkins:
     image: jenkins/jenkins:lts-jdk17
-    container_name: jenkins_devsecops_server
+    container_name: jenkins-ci
     privileged: true
     user: root
     ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - ./jenkins-data:/var/jenkins_home
+      - jenkins_data:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - devsecops-network
-    restart: unless-stopped
+      - devsecops-net
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=true
 
-  # Entorno de Node.js aislado para ejecutar Cypress
-  cypress-runner:
-    image: cypress/included:13.6.0
-    container_name: cypress_qa_runner
-    depends_on:
-      - jenkins-ci
-    volumes:
-      - .:/e2e
+  # Servidor de Seguridad y Calidad de Código Estático (SAST Scan)
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube-sec
+    ports:
+      - "9000:9000"
     networks:
-      - devsecops-network
-    profiles:
-      - tools
+      - devsecops-net
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
 
 networks:
-  devsecops-network:
+  devsecops-net:
     driver: bridge
+
+volumes:
+  jenkins_data:
+  sonarqube_data:

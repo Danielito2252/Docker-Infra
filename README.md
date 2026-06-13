@@ -1,38 +1,152 @@
-# 🐳 Infrastructure as Code (IaC) - Docker Orchestration
+# 🐳 Docker Infrastructure as Code (IaC)
 
-🗂️ **Repositorio 5 de 5** | Ecosistema de Automatización e Ingeniería de Software
+> Infraestructura de automatización para entornos DevSecOps utilizando Docker y Docker Compose.
 
-[![Docker](https://img.shields.io/badge/Docker-Infrastructure_as_Code-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Docker Compose](https://img.shields.io/badge/Docker_Compose-Orchestration-2496ED?style=for-the-badge)](https://docs.docker.com/compose/)
-[![Environment](https://img.shields.io/badge/Environment-Isolated_DevSecOps-brightgreen?style=for-the-badge)](https://en.wikipedia.org/wiki/DevSecOps)
+<div align="center">
 
----
+[![Docker](https://img.shields.io/badge/Docker-IaC-2496ED?style=for-the-badge\&logo=docker\&logoColor=white)](https://www.docker.com/)
+[![Docker Compose](https://img.shields.io/badge/Docker_Compose-Orchestration-2496ED?style=for-the-badge)
+](https://docs.docker.com/compose/)
+[![DevSecOps](https://img.shields.io/badge/DevSecOps-Automation-brightgreen?style=for-the-badge)](https://en.wikipedia.org/wiki/DevSecOps)
 
-## 📝 Descripción del Proyecto
-
-Este repositorio representa el **núcleo de infraestructura y operaciones (Ops)** de todo el ecosistema. Mediante el enfoque de **Infraestructura como Código (IaC)**, se centraliza, empaqueta y orquesta el despliegue de las herramientas utilizadas en los repositorios previos.
-
-A través de Docker, garantizamos que el servidor de integración continua (**Jenkins**) y el motor de pruebas automatizadas (**Cypress**) se ejecuten en contenedores completamente aislados, inmutables y portables, eliminando el clásico problema de *"en mi máquina sí funciona"*.
+</div>
 
 ---
 
-## 📐 Arquitectura de Contenedores Orquestados
+## 📋 Resumen
 
-El archivo `docker-compose.yml` de este repositorio levanta de forma coordinada los siguientes servicios sobre una red virtual aislada (`devsecops-network`):
+Este repositorio implementa la capa de **Infraestructura como Código (IaC)** del ecosistema de automatización y calidad de software.
 
-1. **`jenkins-ci` (Servidor de Automatización):** Corre la versión LTS de Jenkins sobre JDK 17, mapeando puertos locales y exponiendo el socket de Docker para permitir flujos "Docker-outside-of-Docker" (necesario para nuestro pipeline de DevSecOps).
-2. **`cypress-runner` (Suite de QA):** Imagen oficial de Cypress preconfigurada con todas las dependencias del sistema operativo listas para ejecutar pruebas E2E sin instalaciones locales adicionales.
+Mediante **Docker** y **Docker Compose**, se orquestan los servicios necesarios para ejecutar procesos de:
+
+* ⚙️ Integración Continua (CI)
+* 🚀 Automatización DevSecOps
+* 🧪 Pruebas E2E con Cypress
+* 📦 Entornos reproducibles y portables
+
+Todo el entorno puede desplegarse en cualquier máquina con exactamente la misma configuración.
 
 ---
 
-## 🚀 Guía de Despliegue Rápido
+## 🏗️ Arquitectura
 
-Para replicar y levantar toda la infraestructura de este proyecto universitario en cualquier computadora, solo se requieren dos comandos en la terminal:
+```text
+┌─────────────────────┐
+│    Docker Host      │
+└──────────┬──────────┘
+           │
+           ▼
+┌───────────────────────────────┐
+│      devsecops-network        │
+└───────────┬───────────┬───────┘
+            │           │
+            ▼           ▼
+
+   Jenkins CI      Cypress Runner
+   (Automation)      (QA E2E)
+```
+
+### Servicios desplegados
+
+| Servicio          | Función                              |
+| ----------------- | ------------------------------------ |
+| 🧩 Jenkins CI     | Automatización de pipelines CI/CD    |
+| 🧪 Cypress Runner | Ejecución de pruebas End-to-End      |
+| 🌐 Docker Network | Comunicación aislada entre servicios |
+
+---
+
+## 🚀 Inicio Rápido
+
+### Clonar repositorio
 
 ```bash
-# 1. Clonar el repositorio
-git clone [https://github.com/Danielito2252/docker-infra.git](https://github.com/Danielito2252/docker-infra.git)
-cd docker-infra
+git clone https://github.com/Danielito2252/docker-infra.git
 
-# 2. Levantar toda la infraestructura en segundo plano
+cd docker-infra
+```
+
+### Levantar infraestructura
+
+```bash
 docker compose up -d
+```
+
+---
+
+## 🔍 Validación
+
+Verificar contenedores activos:
+
+```bash
+docker ps
+```
+
+Consultar logs de Jenkins:
+
+```bash
+docker logs jenkins-ci
+```
+
+Detener infraestructura:
+
+```bash
+docker compose down
+```
+
+---
+
+## 📊 Evidencias
+
+### 🚀 Pipeline DevSecOps
+
+> Flujo completo de integración continua y automatización.
+
+![Pipeline Stage View](docs/images/pipeline-stage-view.png)
+
+---
+
+### 🔒 Análisis SAST - SonarQube
+
+> Métricas de calidad y seguridad del código.
+
+![SonarQube Dashboard](docs/images/sonarqube-dashboard.png)
+
+---
+
+## 🔗 Ecosistema Relacionado
+
+Este proyecto sirve como base para los demás componentes del portafolio:
+
+| Repositorio                | Función                   |
+| -------------------------- | ------------------------- |
+| Jenkins-DevSecOps-Pipeline | Automatización CI/CD      |
+| Cypress-E2E-Suite          | Pruebas automatizadas     |
+| Docker-Infrastructure      | Orquestación de servicios |
+
+---
+
+## 🛠️ Tecnologías
+
+* Docker
+* Docker Compose
+* Jenkins LTS
+* Cypress
+* DevSecOps
+* Infrastructure as Code (IaC)
+
+---
+
+## 👨‍💻 Autor
+
+### Herberth Barrios
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-blue?style=for-the-badge\&logo=linkedin)](https://www.linkedin.com/in/herberth-barrios-299236261/)
+
+[![GitHub](https://img.shields.io/badge/GitHub-Ver_Perfil-black?style=for-the-badge\&logo=github)](https://github.com/Danielito2252)
+
+---
+
+## 📄 Licencia
+
+Distribuido bajo la Licencia MIT.
