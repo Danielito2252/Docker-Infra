@@ -1,80 +1,63 @@
 # 🐳 Docker Infrastructure as Code (IaC)
 
-> Infraestructura de automatización para entornos DevSecOps utilizando Docker y Docker Compose.
+### Infraestructura DevSecOps para Jenkins, Cypress y OWASP ZAP
 
-<div align="center">
-
-[![Docker](https://img.shields.io/badge/Docker-IaC-2496ED?style=for-the-badge\&logo=docker\&logoColor=white)](https://www.docker.com/)
-[![Docker Compose](https://img.shields.io/badge/Docker_Compose-Orchestration-2496ED?style=for-the-badge)
-](https://docs.docker.com/compose/)
-[![DevSecOps](https://img.shields.io/badge/DevSecOps-Automation-brightgreen?style=for-the-badge)](https://en.wikipedia.org/wiki/DevSecOps)
-
-</div>
+> Entorno reproducible basado en Docker Compose para ejecutar pipelines CI/CD, pruebas automatizadas E2E y análisis de seguridad dinámica (DAST).
 
 ---
 
-## 📋 Resumen
+## 📋 Descripción
 
-Este repositorio implementa la capa de **Infraestructura como Código (IaC)** del ecosistema de automatización y calidad de software.
+Este repositorio contiene la infraestructura como código (IaC) necesaria para desplegar un ecosistema completo de automatización y seguridad.
 
-Mediante **Docker** y **Docker Compose**, se orquestan los servicios necesarios para ejecutar procesos de:
+Con un único comando es posible aprovisionar:
 
-* ⚙️ Integración Continua (CI)
-* 🚀 Automatización DevSecOps
-* 🧪 Pruebas E2E con Cypress
-* 📦 Entornos reproducibles y portables
-
-Todo el entorno puede desplegarse en cualquier máquina con exactamente la misma configuración.
+* ⚙️ Jenkins CI Server
+* 🧪 Entorno de ejecución Cypress
+* 🔒 OWASP ZAP para análisis DAST
+* 🌐 Red privada Docker para comunicación segura
 
 ---
 
 ## 🏗️ Arquitectura
 
 ```text
-┌─────────────────────┐
-│    Docker Host      │
-└──────────┬──────────┘
-           │
-           ▼
-┌───────────────────────────────┐
-│      devsecops-network        │
-└───────────┬───────────┬───────┘
-            │           │
-            ▼           ▼
-
-   Jenkins CI      Cypress Runner
-   (Automation)      (QA E2E)
+┌─────────────┐
+│   GitHub    │
+└──────┬──────┘
+       │ Webhook
+       ▼
+┌─────────────┐
+│   Jenkins   │
+└──────┬──────┘
+       │
+ ┌─────┴─────┐
+ │           │
+ ▼           ▼
+Cypress   OWASP ZAP
+(E2E)      (DAST)
 ```
 
-### Servicios desplegados
+---
 
-| Servicio          | Función                              |
+## ⚙️ Servicios Desplegados
+
+| Servicio          | Propósito                            |
 | ----------------- | ------------------------------------ |
-| 🧩 Jenkins CI     | Automatización de pipelines CI/CD    |
-| 🧪 Cypress Runner | Ejecución de pruebas End-to-End      |
+| 🏗️ Jenkins       | Orquestación de pipelines CI/CD      |
+| 🧪 Cypress        | Ejecución de pruebas automatizadas   |
+| 🔒 OWASP ZAP      | Escaneo de vulnerabilidades DAST     |
 | 🌐 Docker Network | Comunicación aislada entre servicios |
 
 ---
 
-## 🚀 Inicio Rápido
+## 🚀 Despliegue
 
-### Clonar repositorio
-
-```bash
-git clone https://github.com/Danielito2252/docker-infra.git
-
-cd docker-infra
-```
-
-### Levantar infraestructura
+Levantar toda la infraestructura:
 
 ```bash
 docker compose up -d
 ```
-
----
-
-## 🔍 Validación
 
 Verificar contenedores activos:
 
@@ -88,7 +71,7 @@ Consultar logs de Jenkins:
 docker logs jenkins-ci
 ```
 
-Detener infraestructura:
+Detener el entorno:
 
 ```bash
 docker compose down
@@ -98,55 +81,84 @@ docker compose down
 
 ## 📊 Evidencias
 
-### 🚀 Pipeline DevSecOps
+### 🔄 Pipeline DevSecOps
 
-> Flujo completo de integración continua y automatización.
 
-![Pipeline Stage View](docs/images/pipeline-stage-view.png)
+
+images/stage-view-success.png
+
 
 ---
 
-### 🔒 Análisis SAST - SonarQube
+### 🧪 Resultados de Cypress
 
-> Métricas de calidad y seguridad del código.
 
-![SonarQube Dashboard](docs/images/sonarqube-dashboard.png)
+
+
+images/cypress-run.png
+
+
+---
+
+### 🔒 Reporte DAST
+
+
+
+images/zap-report.png
+
 
 ---
 
 ## 🔗 Ecosistema Relacionado
 
-Este proyecto sirve como base para los demás componentes del portafolio:
-
-| Repositorio                | Función                   |
+| Proyecto                   | Función                   |
 | -------------------------- | ------------------------- |
-| Jenkins-DevSecOps-Pipeline | Automatización CI/CD      |
-| Cypress-E2E-Suite          | Pruebas automatizadas     |
-| Docker-Infrastructure      | Orquestación de servicios |
+| Jenkins-DevSecOps-Pipeline | Orquestación principal    |
+| Cypress-E2E-Suite          | Automatización funcional  |
+| Cypress-Framework          | Framework de pruebas      |
+| TuleApp-QA-Workflow        | Gestión y trazabilidad QA |
 
 ---
 
-## 🛠️ Tecnologías
+## 📁 Estructura del Proyecto
 
-* Docker
-* Docker Compose
-* Jenkins LTS
-* Cypress
-* DevSecOps
-* Infrastructure as Code (IaC)
+```text
+.
+├── docker-compose.yml
+├── jenkins_home/
+├── docs/
+│   └── images/
+└── README.md
+```
+
+---
+
+## 🎯 Beneficios
+
+✅ Infraestructura reproducible
+
+✅ Despliegue en segundos
+
+✅ Integración DevSecOps
+
+✅ Automatización E2E
+
+✅ Escaneo de vulnerabilidades
+
+✅ Fácil mantenimiento
 
 ---
 
 ## 👨‍💻 Autor
 
-### Herberth Barrios
+**Herberth Barrios**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Conectar-blue?style=for-the-badge\&logo=linkedin)](https://www.linkedin.com/in/herberth-barrios-299236261/)
+🔗 GitHub: https://github.com/Danielito2252
 
-[![GitHub](https://img.shields.io/badge/GitHub-Ver_Perfil-black?style=for-the-badge\&logo=github)](https://github.com/Danielito2252)
+🔗 LinkedIn: https://www.linkedin.com/in/herberth-barrios-299236261/
 
 ---
 
 ## 📄 Licencia
 
-Distribuido bajo la Licencia MIT.
+Distribuido bajo la licencia **MIT License**.

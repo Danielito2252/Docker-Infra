@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # Servidor de automatización Jenkins (Eje central de orquestación de CI/CD)
+  # Servidor de automatización Jenkins (Orquestador central del ecosistema)
   jenkins:
     image: jenkins/jenkins:lts-jdk17
     container_name: jenkins-ci
@@ -18,21 +18,9 @@ services:
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=true
 
-  # Servidor de Seguridad y Calidad de Código Estático (SAST Scan)
-  sonarqube:
-    image: sonarqube:community
-    container_name: sonarqube-sec
-    ports:
-      - "9000:9000"
-    networks:
-      - devsecops-net
-    volumes:
-      - sonarqube_data:/opt/sonarqube/data
-
 networks:
   devsecops-net:
     driver: bridge
 
 volumes:
   jenkins_data:
-  sonarqube_data:
