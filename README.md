@@ -1,4 +1,4 @@
-# 🐳 Docker Infrastructure as Code (IaC)
+# 🐳 Docker Infrastructura Como Codigo (IaC)
 
 ### Infraestructura DevSecOps para Jenkins, Cypress y OWASP ZAP
 
@@ -84,8 +84,7 @@ docker compose down
 ### 🔄 Pipeline DevSecOps
 
 
-
-images/stage-view-success.png
+<img width="1324" height="633" alt="stage-view-success" src="https://github.com/user-attachments/assets/1400a852-12e2-4dc6-9401-b53eb9164c75" />
 
 
 ---
@@ -93,9 +92,7 @@ images/stage-view-success.png
 ### 🧪 Resultados de Cypress
 
 
-
-
-images/cypress-run.png
+<img width="1342" height="554" alt="cypress-run" src="https://github.com/user-attachments/assets/44e4fffd-b876-419d-a32c-b9beb39d9161" />
 
 
 ---
@@ -103,8 +100,8 @@ images/cypress-run.png
 ### 🔒 Reporte DAST
 
 
+<img width="393" height="278" alt="zap-report" src="https://github.com/user-attachments/assets/2f8c38bf-acb2-4a64-a175-67cf14ba551b" />
 
-images/zap-report.png
 
 
 ---
